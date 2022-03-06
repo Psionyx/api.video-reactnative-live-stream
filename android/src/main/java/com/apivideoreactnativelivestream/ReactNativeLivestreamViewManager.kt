@@ -84,14 +84,13 @@ class ReactNativeLivestreamViewManager : SimpleViewManager<View>(), ConnectCheck
   }
 
   override fun receiveCommand(root: View, commandId: Int, args: ReadableArray?)
-    bitrate = args?.getLong("bitrate")
     super.receiveCommand(root, commandId, args)
     when (commandId) {
       COMMAND_START_LIVE -> startStreaming()
       COMMAND_STOP_LIVE -> stopStreaming()
       ENABLE_AUDIO -> enableAudio()
       DISABLE_AUDIO -> disableAudio()
-      CHANGE_VIDEO_BITRATE -> changeVideoBitRate(bitrate)
+      CHANGE_VIDEO_BITRATE -> changeVideoBitRate(args)
       else -> {
         throw IllegalArgumentException("Unsupported command %d received by %s. $commandId")
       }
@@ -193,8 +192,8 @@ class ReactNativeLivestreamViewManager : SimpleViewManager<View>(), ConnectCheck
     apiVideo.audioMuted = false
   }
 
-  private fun changeVideoBitRate(bitrate: Double){
-    Log.e("new bitrate rtmp", bitrate.toString())
+  private fun changeVideoBitRate(bitrate: ReadableArray){
+    Log.e("new bitrate rtmp", bitrate)
   }
 
   override fun onConnectionSuccessRtmp() {
