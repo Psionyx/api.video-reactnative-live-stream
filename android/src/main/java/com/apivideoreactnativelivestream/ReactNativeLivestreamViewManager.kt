@@ -85,7 +85,7 @@ class ReactNativeLivestreamViewManager : SimpleViewManager<View>(), ConnectCheck
 
   override fun receiveCommand(root: View, commandId: Int, args: ReadableArray?) {
     super.receiveCommand(root, commandId, args)
-    bitrate = args.getLong("bitrate")
+    bitrate = args.getDouble("bitrate")
     when (commandId) {
       COMMAND_START_LIVE -> startStreaming()
       COMMAND_STOP_LIVE -> stopStreaming()
@@ -193,7 +193,7 @@ class ReactNativeLivestreamViewManager : SimpleViewManager<View>(), ConnectCheck
     apiVideo.audioMuted = false
   }
 
-  private fun changeVideoBitRate(bitrate: Long){
+  private fun changeVideoBitRate(bitrate: Double){
     Log.e("new bitrate rtmp", bitrate.toString())
   }
 
