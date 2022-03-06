@@ -55,6 +55,7 @@ class ReactNativeLivestreamViewManager : SimpleViewManager<View>(), ConnectCheck
   private val COMMAND_STOP_LIVE = 2
   private val ENABLE_AUDIO = 3
   private val DISABLE_AUDIO = 4
+  private val CHANGE_VIDEO_BITRATE = 5
 
   private var liveStreamKey: String? = null
   private var rtmpServerUrl: String? = null
@@ -89,6 +90,7 @@ class ReactNativeLivestreamViewManager : SimpleViewManager<View>(), ConnectCheck
       COMMAND_STOP_LIVE -> stopStreaming()
       ENABLE_AUDIO -> enableAudio()
       DISABLE_AUDIO -> disableAudio()
+      CHANGE_VIDEO_BITRATE -> changeVideoBitRate(args)
       else -> {
         throw IllegalArgumentException("Unsupported command %d received by %s. $commandId")
       }
@@ -100,7 +102,8 @@ class ReactNativeLivestreamViewManager : SimpleViewManager<View>(), ConnectCheck
       "startStreamingFromManager", COMMAND_START_LIVE,
       "stopStreamingFromManager", COMMAND_STOP_LIVE,
       "enableAudioFromManager", ENABLE_AUDIO,
-      "disableAudioFromManager", DISABLE_AUDIO
+      "disableAudioFromManager", DISABLE_AUDIO,
+      "changeVideoBitrateFromManager", CHANGE_VIDEO_BITRATE
     )
   }
 
@@ -187,6 +190,10 @@ class ReactNativeLivestreamViewManager : SimpleViewManager<View>(), ConnectCheck
 
   private fun enableAudio() {
     apiVideo.audioMuted = false
+  }
+
+  private fun changeVideoBitRate(bitrate: Long){
+    Log.e("new bitrate rtmp", bitrate.toString())
   }
 
   override fun onConnectionSuccessRtmp() {

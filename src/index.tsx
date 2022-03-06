@@ -48,6 +48,7 @@ export type ReactNativeLivestreamMethods = {
   stopStreaming: () => void;
   enableAudio: () => void;
   disableAudio: () => void;
+  changeBitRate: (bitrate: number) => void;
 };
 
 export const ReactNativeLivestreamViewNative =
@@ -125,6 +126,14 @@ const LivestreamView = forwardRef<
           findNodeHandle(nativeRef.current),
           UIManager.getViewManagerConfig('ReactNativeLivestreamView').Commands
             .disableAudioFromManager,
+          []
+        );
+      },
+      changeBitRate: () => {
+        UIManager.dispatchViewManagerCommand(
+          findNodeHandle(nativeRef.current),
+          UIManager.getViewManagerConfig('ReactNativeLivestreamView').Commands
+            .changeBitRate,
           []
         );
       },

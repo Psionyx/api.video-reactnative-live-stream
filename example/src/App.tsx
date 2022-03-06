@@ -33,12 +33,10 @@ export default function App() {
           resolution: res,
           camera,
           orientation,
+          bitrate: 100000,
         }}
-        liveStreamKey={
-          Platform.OS === 'android'
-            ? '833ae9df-d228-4ff3-b15a-b4ac53280b80'
-            : 'd08c582e-e251-4f9e-9894-8c8d69755d45'
-        }
+        liveStreamKey={'re_5436591_290fd6ac9eeb8b614fa9'}
+        rtmpServerUrl={'rtmp://live.restream.io/live/'}
         audio={{
           muted: audioMuted,
         }}
@@ -97,11 +95,7 @@ export default function App() {
             height: 50,
           }}
           onPress={() => {
-            if (res === '360p') {
-              setRes('720p');
-            } else {
-              setRes('360p');
-            }
+            ref.current?.changeBitRate(5000000);
           }}
         />
       </View>
