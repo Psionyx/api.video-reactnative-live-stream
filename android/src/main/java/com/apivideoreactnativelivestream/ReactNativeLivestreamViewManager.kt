@@ -83,10 +83,10 @@ class ReactNativeLivestreamViewManager : SimpleViewManager<View>(), ConnectCheck
     return view
   }
 
-  override fun receiveCommand(root: View, commandId: Int, args: ReadableArray?) {
+  override fun receiveCommand(root: View, commandId: Int, args: ReadableArray?)
     super.receiveCommand(root, commandId, args)
-    bitrate = args.getDouble("bitrate")
     when (commandId) {
+      bitrate = args?.getLong("bitrate")
       COMMAND_START_LIVE -> startStreaming()
       COMMAND_STOP_LIVE -> stopStreaming()
       ENABLE_AUDIO -> enableAudio()
