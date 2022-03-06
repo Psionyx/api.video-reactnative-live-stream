@@ -85,12 +85,13 @@ class ReactNativeLivestreamViewManager : SimpleViewManager<View>(), ConnectCheck
 
   override fun receiveCommand(root: View, commandId: Int, args: ReadableArray?) {
     super.receiveCommand(root, commandId, args)
+    bitrate = args.getLong("bitrate")
     when (commandId) {
       COMMAND_START_LIVE -> startStreaming()
       COMMAND_STOP_LIVE -> stopStreaming()
       ENABLE_AUDIO -> enableAudio()
       DISABLE_AUDIO -> disableAudio()
-      CHANGE_VIDEO_BITRATE -> changeVideoBitRate(args)
+      CHANGE_VIDEO_BITRATE -> changeVideoBitRate(bitrate)
       else -> {
         throw IllegalArgumentException("Unsupported command %d received by %s. $commandId")
       }
